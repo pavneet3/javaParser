@@ -4,15 +4,15 @@ public class Constant {
 
 	public static final String DB_NAME = "javaTest";
 	public static final String COLL_JAVA = "javaColl";
-	public static final String HOST = "localhost";
+	public static final String BASE_URL = "localhost";
+	public static final Integer PORT = 27017;
 	public static final String SMS = "SMS";
 	public static final String WEB = "WEB";
 	public static final String SCHD = "SCHD";
-	public static final String SHEET_TO_BE_PARSED = "C:\\Sheet_to_be_parsed.xls";
-	public static final String SHEET_TO_BE_POPULATED = "F:\\Empty_Sheet_to_be_populated.xls";
+	public static final String SHEET_TO_BE_PARSED = "resources\\Sheet_to_be_parsed1.xls";
+	public static final String SHEET_TO_BE_POPULATED = "resources\\Empty_Sheet_to_be_populated.xls";
 	public static final String INVALID_PARSE_MSG = "Invalid Delivery Mode, failed to read line ";
-	
-	
+
 	public static class FieldNames {
 
 		public static final String DAY = "day";

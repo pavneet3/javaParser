@@ -33,11 +33,13 @@ public class ParserUtils {
 			/* validation condition to be met for data to be parsed */
 			if (dMode.contains(Constant.SCHD)) {
 				String split[] = dMode.split("\\|");
-				if (dMode.contains("|") && !"".equals(split[1]) && split[1].contains(":") && split[1].length() == 5) {
+				if (dMode.contains("|") && !"".equals(split[1]) && split[1].contains(":") && split[1].length() == 5
+						&& Integer.parseInt(split[1].split(":")[0]) < 23
+						&& Integer.parseInt(split[1].split(":")[1]) < 60) {
 					time = getTimeValue(split[1]);
 					dMode = split[0];
 				} else {
-					System.out.println(Constant.INVALID_PARSE_MSG + sheetData.indexOf(data));
+					System.out.println(Constant.INVALID_PARSE_MSG + (sheetData.indexOf(data) + 1));
 					continue;
 				}
 			}

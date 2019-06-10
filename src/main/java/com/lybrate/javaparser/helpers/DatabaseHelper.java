@@ -1,11 +1,10 @@
 package com.lybrate.javaparser.helpers;
 
-import static com.lybrate.javaparser.constants.Constant.*;
-
 import java.util.List;
 
 import org.bson.Document;
 
+import com.lybrate.javaparser.constants.Constant;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -17,7 +16,7 @@ public class DatabaseHelper {
 
 	private MongoClient getMongoClient() {
 		if (mClient == null) {
-			mClient = new MongoClient(HOST, 27017);
+			mClient = new MongoClient(Constant.BASE_URL, Constant.PORT);
 		}
 		return mClient;
 	}

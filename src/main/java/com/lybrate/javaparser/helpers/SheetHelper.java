@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -114,6 +115,10 @@ public class SheetHelper {
 
 			file.close();
 
+			for (int i = 1; i < sheet.getLastRowNum(); i++) {
+				clearRow(sheet.getRow(i));
+			}
+
 			for (int i = 0; i < sheetData.size(); i++) {
 
 				row = sheet.getRow(i + 1);
@@ -129,13 +134,13 @@ public class SheetHelper {
 					if (cell == null) {
 						cell = row.createCell(j);
 					}
+					cell.setCellStyle(getCellStyle(workbook));
 
 					LinkedHashMap<String, Object> rowData = sheetData.get(i);
 
 					String columnData = (String) rowData.get(headerData.get(j));
 
 					cell.setCellValue(columnData);
-					cell.setCellStyle(getCellStyle(workbook));
 				}
 
 			}
@@ -152,13 +157,22 @@ public class SheetHelper {
 		}
 	}
 
+	private void clearRow(Row row) {
+		for (int j = 0; j < row.getLastCellNum(); j++) {
+			Cell cell = row.getCell(j);
+			if (cell != null) {
+				cell.setCellValue("");
+			}
+		}
+	}
+
 	/**
 	 * Utility method to provide style to cells in sheet
 	 * 
 	 * @return List<LinkedHashMap<String, Object>>
 	 */
-	private CellStyle getCellStyle(HSSFWorkbook workbook) {
-		CellStyle style = workbook.createCellStyle();
+	private HSSFCellStyle getCellStyle(HSSFWorkbook workbook) {
+		HSSFCellStyle style = workbook.createCellStyle();
 		style.setRightBorderColor(IndexedColors.GREY_40_PERCENT.getIndex());
 		style.setBottomBorderColor(IndexedColors.GREY_40_PERCENT.getIndex());
 		style.setLeftBorderColor(IndexedColors.GREY_40_PERCENT.getIndex());
